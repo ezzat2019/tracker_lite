@@ -25,7 +25,7 @@ class _FilterDropdownState extends State<FilterDropdown> {
         if (state is DashboardFilterState) {
           selectedValue = state.filter;
         } else {
-          selectedValue = context.read<DashboardBloc>().currentFilter;
+          selectedValue = options.first;
         }
 
         return Container(

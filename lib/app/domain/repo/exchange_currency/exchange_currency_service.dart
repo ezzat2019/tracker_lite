@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
 
-abstract  class ExchangeCurrencyService{
-
+abstract class ExchangeCurrencyService {
   Future<Response> getExchangeRate();
-
 }

@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:tracker_lite/app/core/utils/network_manager.dart';
@@ -7,7 +6,9 @@ import 'package:tracker_lite/app/core/utils/network_manager.dart';
 class DioManager {
   late Dio dio;
 
-  DioManager();
+  DioManager() {
+    init();
+  }
 
   Dio init() {
     dio = Dio();
@@ -57,6 +58,4 @@ class DioManager {
       DioException error, ErrorInterceptorHandler handler) {
     handler.next(error);
   }
-
-
 }

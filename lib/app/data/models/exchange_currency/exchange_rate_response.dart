@@ -7,7 +7,7 @@ class ExchangeRateResponse {
   final int timeNextUpdateUnix;
   final String timeNextUpdateUtc;
   final String baseCode;
-  final Map<String, double> conversionRates;
+  final List<CurrencyRate> conversionRates; // بدل Map
 
   ExchangeRateResponse({
     required this.result,
@@ -23,15 +23,9 @@ class ExchangeRateResponse {
 
   factory ExchangeRateResponse.fromJson(Map<String, dynamic> json) {
     final rawRates = json['conversion_rates'] as Map<String, dynamic>;
-    final parsedRates = <String, double>{};
-
-    for (final entry in rawRates.entries) {
-      final key = entry.key;
-      final value = entry.value;
-      if (value is num) {
-        parsedRates[key] = value.toDouble();
-      }
-    }
+    final ratesList = rawRates.entries
+        .map((entry) => CurrencyRate.fromJson(entry.key, entry.value))
+        .toList();
 
     return ExchangeRateResponse(
       result: json['result'] ?? '',
@@ -42,7 +36,7 @@ class ExchangeRateResponse {
       timeNextUpdateUnix: json['time_next_update_unix'] ?? 0,
       timeNextUpdateUtc: json['time_next_update_utc'] ?? '',
       baseCode: json['base_code'] ?? '',
-      conversionRates: parsedRates,
+      conversionRates: ratesList,
     );
   }
 
@@ -56,7 +50,30 @@ class ExchangeRateResponse {
       'time_next_update_unix': timeNextUpdateUnix,
       'time_next_update_utc': timeNextUpdateUtc,
       'base_code': baseCode,
-      'conversion_rates': conversionRates,
+      'conversion_rates': Map.fromEntries(
+        conversionRates.map((c) => MapEntry(c.code, c.rate)),
+      ),
+    };
+  }
+}
+
+class CurrencyRate {
+  final String code;
+  final double rate;
+
+  CurrencyRate({required this.code, required this.rate});
+
+  factory CurrencyRate.fromJson(String key, dynamic value) {
+    return CurrencyRate(
+      code: key,
+      rate: value is num ? value.toDouble() : 0,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'code': code,
+      'rate': rate,
     };
   }
 }

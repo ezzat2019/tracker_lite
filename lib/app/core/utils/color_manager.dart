@@ -8,11 +8,9 @@ abstract class ColorManager {
   static const Color CARD = Color(0xFF6482F1);
   static const Color FONT = Colors.black;
 
-
   /// light
   static MaterialColor get PRIMARY_MAIN =>
       MaterialColor(PRIMARY.value, _getSwatch(PRIMARY));
-
 
   static Map<int, Color> _getSwatch(Color color) {
     final hslColor = HSLColor.fromColor(color);

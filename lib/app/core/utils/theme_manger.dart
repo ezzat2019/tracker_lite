@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'color_manager.dart';
 
-
 abstract class ThemeManager {
-
   static final ThemeData lightTheme = ThemeData(
     useMaterial3: true,
+    fontFamily: "SF",
     appBarTheme: AppBarTheme(backgroundColor: ColorManager.SECONDARY),
     buttonTheme: ButtonThemeData(
-        buttonColor: ColorManager.PRIMARY,),
-
+      buttonColor: ColorManager.PRIMARY,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(color: ColorManager.PRIMARY),
@@ -34,5 +33,4 @@ abstract class ThemeManager {
         ColorScheme.fromSwatch(primarySwatch: ColorManager.PRIMARY_MAIN)
             .copyWith(surface: ColorManager.SECONDARY),
   );
-
 }

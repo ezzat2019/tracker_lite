@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tracker_lite/app/presention/bloc/dashboard/dashboard_bloc.dart';
-import 'package:tracker_lite/app/presention/ui/dash_board_screen.dart';
+import 'package:tracker_lite/app/presention/ui/dash_board/dash_board_screen.dart';
 
 import 'app/core/utils/get_it_manager.dart';
 import 'app/core/utils/theme_manger.dart';
+import 'app/presention/bloc/add_expense/add_expense_bloc.dart';
 
 void main() async {
   await init();
@@ -33,7 +34,10 @@ class MyApp extends StatelessWidget {
           providers: [
             BlocProvider<DashboardBloc>(
               create: (context) => DashboardBloc(),
-            )
+            ),
+            BlocProvider<AddExpenseBloc>(
+              create: (context) => AddExpenseBloc(),
+            ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
