@@ -16,7 +16,6 @@ class DashboardBloc extends Bloc<DashboardEvents, DashboardStates> {
   DashboardBloc() : super(DashboardInitialState()) {
     on<ChangeHomeFilterEvent>((event, emit) {
       currentFilter = event.filter;
-      pagingController.refresh();
       emit(DashboardFilterState(currentFilter));
     });
 

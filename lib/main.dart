@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nested/nested.dart';
 import 'package:tracker_lite/app/presention/bloc/dashboard/dashboard_bloc.dart';
-import 'package:tracker_lite/app/presention/ui/dash_board/dash_board_screen.dart';
 
 import 'app/core/utils/get_it_manager.dart';
 import 'app/core/utils/theme_manger.dart';
 import 'app/presention/bloc/add_expense/add_expense_bloc.dart';
+import 'app/presention/ui/dashboard/dash_board_screen.dart';
 
 void main() async {
   await init();
@@ -31,14 +32,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (_, child) {
         return MultiBlocProvider(
-          providers: [
-            BlocProvider<DashboardBloc>(
-              create: (context) => DashboardBloc(),
-            ),
-            BlocProvider<AddExpenseBloc>(
-              create: (context) => AddExpenseBloc(),
-            ),
-          ],
+          providers: providers(),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: "Expense Tracker Lite",
@@ -49,5 +43,16 @@ class MyApp extends StatelessWidget {
       },
       child: DashBoardScreen(),
     );
+  }
+
+  List<SingleChildWidget> providers() {
+    return [
+      BlocProvider<DashboardBloc>(
+        create: (context) => DashboardBloc(),
+      ),
+      BlocProvider<AddExpenseBloc>(
+        create: (context) => AddExpenseBloc(),
+      ),
+    ];
   }
 }

@@ -13,6 +13,13 @@ class FilterDropdown extends StatefulWidget {
 }
 
 class _FilterDropdownState extends State<FilterDropdown> {
+  late DashboardBloc bloc;
+  @override
+  void initState() {
+    super.initState();
+    bloc = context.read<DashboardBloc>();
+  }
+
   final List<String> options = [
     'This Month',
     'Last 7 Days',
@@ -21,11 +28,9 @@ class _FilterDropdownState extends State<FilterDropdown> {
   Widget build(BuildContext context) {
     return BlocBuilder<DashboardBloc, DashboardStates>(
       builder: (BuildContext context, DashboardStates state) {
-        String selectedValue;
         if (state is DashboardFilterState) {
-          selectedValue = state.filter;
-        } else {
-          selectedValue = options.first;
+          bloc.currentFilter = state.filter;
+          bloc.pagingController.refresh();
         }
 
         return Container(
@@ -39,7 +44,7 @@ class _FilterDropdownState extends State<FilterDropdown> {
           ),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
-              value: selectedValue,
+              value: bloc.currentFilter,
               isExpanded: true,
               icon: const Icon(
                 Icons.keyboard_arrow_down_outlined,
@@ -49,9 +54,7 @@ class _FilterDropdownState extends State<FilterDropdown> {
               borderRadius: BorderRadius.circular(6),
               onChanged: (String? newValue) {
                 if (newValue != null) {
-                  context
-                      .read<DashboardBloc>()
-                      .add(ChangeHomeFilterEvent(newValue));
+                  bloc.add(ChangeHomeFilterEvent(newValue));
                 }
               },
               items: options.map((String value) {

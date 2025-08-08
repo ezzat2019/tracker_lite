@@ -22,6 +22,8 @@ class _FilterDropdownState extends State<FilterDropdown> {
     return BlocBuilder<DashboardBloc, DashboardStates>(
       builder: (BuildContext context, DashboardStates state) {
         String selectedValue;
+        print("aaaaaaaaaaaaaaaa");
+        print(state.toString());
         if (state is DashboardFilterState) {
           selectedValue = state.filter;
         } else {

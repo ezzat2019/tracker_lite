@@ -15,3 +15,17 @@ class FetchExchangeCurrencyState extends AddExpenseStates {
   @override
   List<Object?> get props => [exchangeRateResponse];
 }
+
+class SelectCategoryState extends AddExpenseStates {
+  final String selectedCategory;
+  SelectCategoryState(this.selectedCategory);
+  @override
+  List<Object?> get props => [selectedCategory];
+}
+
+class SelectCurrencyState extends AddExpenseStates {
+  final CurrencyRate? selectedCurrency;
+  SelectCurrencyState(this.selectedCurrency);
+  @override
+  List<Object?> get props => [selectedCurrency];
+}
