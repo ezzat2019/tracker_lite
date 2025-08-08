@@ -52,10 +52,12 @@ API integration is implemented using **Dio**:
 ---
 
 ## 🖼 UI Screenshots
-
-### Categories & Add Expense
-
-
+![1](https://github.com/user-attachments/assets/161e7136-432c-44c4-bc44-a4559ea9a54b)
+![2](https://github.com/user-attachments/assets/1e32b7f2-e584-4896-b43e-d7bb81b577a0)
+![3](https://github.com/user-attachments/assets/3d1415b1-90d3-44c5-b054-00197008a64c)
+![4](https://github.com/user-attachments/assets/51dbb045-f496-4d1c-aa54-a039aac09afe)
+![5](https://github.com/user-attachments/assets/8ef05424-6514-4ce6-b5bf-24f8e2e12c07)
+![6](https://github.com/user-attachments/assets/02ff3d19-0cde-4337-aeab-87d39ffee52c)
 
 ---
 
@@ -81,21 +83,6 @@ You can download and install the APK directly: [📥 Download APK](https://www.m
 
 ---
 
-## 🛠 Trade-offs & Assumptions
-
-- Used **SharedPreferences** for caching due to its simplicity and fast access, suitable for small datasets.
-- UI is optimized for Android; iOS testing is limited.
-- No authentication implemented in this version.
-
----
-
-## 🐞 Known Bugs / Unimplemented Features
-
-- Some API error responses are not fully localized.
-- Dark mode not implemented yet.
-- No data encryption for local storage.
-
----
 
 ## 📂 GitHub Repository
 
