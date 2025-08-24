@@ -36,7 +36,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         builder: (BuildContext context, DashboardStates state) {
           return Stack(
             children: [
-              buildHomeBody(),
+              buildHomeBody(state),
               buildHomeCard(state),
             ],
           );
@@ -47,11 +47,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     );
   }
 
-  Column buildHomeBody() {
+  Column buildHomeBody(DashboardStates state) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildHeaderHome(),
+        buildHeaderHome(state),
         70.verticalSpace,
         buildRecentTitle(),
         12.verticalSpace,
@@ -100,7 +100,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     );
   }
 
-  Container buildHeaderHome() {
+  Container buildHeaderHome(DashboardStates state) {
     return Container(
       width: 1.sw,
       height: .35.sh,
@@ -149,7 +149,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   ],
                 ),
                 Spacer(),
-                FilterDropdown()
+                FilterDropdown(state:state ,)
               ],
             )
           ],

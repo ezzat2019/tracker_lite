@@ -6,7 +6,8 @@ import 'package:tracker_lite/app/presention/bloc/dashboard/dashboard_events.dart
 import 'package:tracker_lite/app/presention/bloc/dashboard/dashboard_states.dart';
 
 class FilterDropdown extends StatefulWidget {
-  const FilterDropdown({super.key});
+  final DashboardStates state;
+  const FilterDropdown({required this.state,super.key});
 
   @override
   State<FilterDropdown> createState() => _FilterDropdownState();
@@ -26,53 +27,48 @@ class _FilterDropdownState extends State<FilterDropdown> {
   ];
 
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardBloc, DashboardStates>(
-      builder: (BuildContext context, DashboardStates state) {
-        if (state is DashboardFilterState) {
-          bloc.currentFilter = state.filter;
-          bloc.pagingController.refresh();
-        }
 
-        return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 12),
-          width: 105.w,
-          height: 35.h,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8.r),
-            border: Border.all(color: Colors.grey.shade300),
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      width: 105.w,
+      height: 35.h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8.r),
+        border: Border.all(color: Colors.grey.shade300),
+      ),
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton<String>(
+          value: bloc.currentFilter,
+          isExpanded: true,
+          icon: const Icon(
+            Icons.keyboard_arrow_down_outlined,
+            color: Colors.black,
           ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: bloc.currentFilter,
-              isExpanded: true,
-              icon: const Icon(
-                Icons.keyboard_arrow_down_outlined,
-                color: Colors.black,
+          dropdownColor: Colors.white,
+          borderRadius: BorderRadius.circular(6),
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              bloc.add(ChangeHomeFilterEvent(newValue));
+            }
+          },
+          items: options.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(
+                value,
+                style: TextStyle(
+                    fontSize: 10.sp,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
               ),
-              dropdownColor: Colors.white,
-              borderRadius: BorderRadius.circular(6),
-              onChanged: (String? newValue) {
-                if (newValue != null) {
-                  bloc.add(ChangeHomeFilterEvent(newValue));
-                }
-              },
-              items: options.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: TextStyle(
-                        fontSize: 10.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
-                  ),
-                );
-              }).toList(),
-            ),
-          ),
-        );
-      },
+            );
+          }).toList(),
+        ),
+      ),
     );
+
+
   }
 }
