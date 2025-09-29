@@ -1,6 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+// Definition for the CategoryWidget class that AddExpenseScreen expects
+class CategoryWidget extends StatelessWidget {
+  final String iconPath; // This is a path for Image.asset
+  final String label;
+  final VoidCallback onTap;
+
+  const CategoryWidget({
+    Key? key,
+    required this.iconPath,
+    required this.label,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            iconPath,
+            width: 40, // Example size, adjust as needed
+            height: 40, // Example size, adjust as needed
+            errorBuilder: (context, error, stackTrace) {
+              // Fallback if image fails to load, e.g., show a default icon
+              return Icon(Icons.category, size: 40);
+            },
+          ),
+          SizedBox(height: 4.h), // Using .h from flutter_screenutil for spacing
+          Text(
+            label,
+            style: TextStyle(
+                fontSize:
+                    12.sp), // Using .sp from flutter_screenutil for font size
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// --- Existing code from the file ---
 Widget categoryIcon2(IconData icon, Color color) {
   return Column(
     children: [
@@ -22,7 +66,10 @@ Widget categoryIcon(IconData icon, String title, Color color) {
         child: Icon(icon, color: color),
       ),
       SizedBox(height: 4.h),
-      Text(title, style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+      Text(title,
+          style: TextStyle(
+              fontSize: 12.sp,
+              fontWeight: FontWeight.bold)), // Adjusted to use .sp
     ],
   );
 }
@@ -36,6 +83,7 @@ final List<Widget> icons = [
   categoryIcon(Icons.home, 'Rent', Colors.purple),
   categoryIcon(Icons.add, 'Add', Colors.grey),
 ];
+
 Widget getCategoryWidget(String name) {
   final Map<String, Map<String, dynamic>> categories = {
     'Groceries': {
