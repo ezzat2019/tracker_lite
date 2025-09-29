@@ -6,8 +6,8 @@ import 'package:tracker_lite/app/presention/bloc/dashboard/dashboard_events.dart
 import 'package:tracker_lite/app/presention/bloc/dashboard/dashboard_states.dart';
 
 class FilterDropdown extends StatefulWidget {
-  final DashboardStates state;
-  const FilterDropdown({required this.state,super.key});
+
+  const FilterDropdown({super.key});
 
   @override
   State<FilterDropdown> createState() => _FilterDropdownState();
